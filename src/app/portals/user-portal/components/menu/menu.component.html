@@ -1,0 +1,394 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- Header with Search -->
+  <div class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <h1 class="text-2xl font-bold text-gray-900">Our Menu</h1>
+
+        <div class="relative w-full md:w-96">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Search dishes or restaurants..."
+            class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+          />
+          <svg
+            class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="sticky top-0 bg-white shadow-sm z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex space-x-2 overflow-x-auto py-4">
+        <button
+          *ngFor="let cat of categories"
+          (click)="selectedCategory = cat.id"
+          [class.bg-orange-500]="selectedCategory === cat.id"
+          [class.text-white]="selectedCategory === cat.id"
+          [class.bg-gray-100]="selectedCategory !== cat.id"
+          class="px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors duration-200 hover:bg-orange-500 hover:text-white flex items-center space-x-2"
+        >
+          <span>{{ cat.icon }}</span>
+          <span>{{ cat.name }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        *ngFor="let item of filteredItems"
+        class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+      >
+        <!-- Image -->
+        <div class="relative h-48">
+          <img
+            [src]="item.image"
+            [alt]="item.name"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-md"
+          >
+            <span class="text-orange-500 font-bold">{{ item.price }} Birr</span>
+          </div>
+          <div *ngIf="item.isPopular" class="absolute top-4 left-4">
+            <span
+              class="bg-orange-500 text-white px-2 py-1 rounded-full text-sm"
+              >Popular</span
+            >
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-lg font-bold text-gray-900">{{ item.name }}</h3>
+              <p class="text-gray-500 text-sm">{{ item.restaurant }}</p>
+            </div>
+            <div class="flex items-center bg-gray-50 px-2 py-1 rounded">
+              <span class="text-yellow-400">★</span>
+              <span class="ml-1 text-sm font-medium text-gray-600">{{
+                item.rating
+              }}</span>
+            </div>
+          </div>
+
+          <p class="text-gray-600 text-sm mb-4">{{ item.description }}</p>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center text-gray-500 text-sm">
+              <svg
+                class="w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {{ item.prepTime }} min
+            </div>
+
+            <button
+              (click)="openCustomizeModal(item)"
+              class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-200"
+            >
+              Customize Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Button -->
+  <button
+    (click)="toggleCartView()"
+    class="fixed right-6 bottom-6 z-40 bg-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-orange-600 transition-all duration-300"
+  >
+    <div class="relative">
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+        />
+      </svg>
+      <span
+        *ngIf="(cartService.cartItems$ | async)?.length"
+        class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"
+      >
+        {{ (cartService.cartItems$ | async)?.length }}
+      </span>
+    </div>
+  </button>
+
+  <!-- Cart Slide-over -->
+  <app-cart
+    *ngIf="showCart"
+    (closeCart)="toggleCartView()"
+    class="z-50"
+  ></app-cart>
+
+  <!-- Customization Modal -->
+  <div
+    *ngIf="showCustomizeModal && selectedItem"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+  >
+    <div
+      class="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+    >
+      <!-- Modal Header -->
+      <div
+        class="bg-orange-500 text-white px-6 py-4 flex justify-between items-center sticky top-0"
+      >
+        <h3 class="text-lg font-semibold">Customize Your Order</h3>
+        <button
+          (click)="closeCustomizeModal()"
+          class="text-white hover:text-gray-200"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Order Form -->
+      <form
+        [formGroup]="customizeForm"
+        (ngSubmit)="addToCartWithCustomization()"
+        class="p-6"
+      >
+        <!-- Item Details -->
+        <div class="flex items-center space-x-4 mb-6">
+          <img
+            [src]="selectedItem.image"
+            [alt]="selectedItem.name"
+            class="w-20 h-20 rounded-lg object-cover"
+          />
+          <div>
+            <h4 class="font-bold text-gray-900">{{ selectedItem.name }}</h4>
+            <p class="text-gray-500">{{ selectedItem.restaurant }}</p>
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Quantity</label
+          >
+          <div class="flex items-center space-x-3">
+            <button
+              type="button"
+              (click)="
+                customizeForm
+                  .get('quantity')
+                  ?.setValue(customizeForm.get('quantity')?.value - 1)
+              "
+              [disabled]="customizeForm.get('quantity')?.value <= 1"
+              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 disabled:opacity-50"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              formControlName="quantity"
+              min="1"
+              class="w-16 text-center border-gray-300 rounded-md"
+            />
+            <button
+              type="button"
+              (click)="
+                customizeForm
+                  .get('quantity')
+                  ?.setValue(customizeForm.get('quantity')?.value + 1)
+              "
+              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Size Selection -->
+        <div *ngIf="selectedItem.customizationOptions?.sizes" class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Size</label
+          >
+          <select
+            formControlName="size"
+            class="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+          >
+            <option
+              *ngFor="let size of selectedItem.customizationOptions?.sizes"
+              [value]="size"
+            >
+              {{ size }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Spice Level -->
+        <div
+          *ngIf="selectedItem.customizationOptions?.spiceLevels"
+          class="mb-6"
+        >
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Spice Level</label
+          >
+          <select
+            formControlName="spiceLevel"
+            class="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+          >
+            <option
+              *ngFor="
+                let level of selectedItem.customizationOptions?.spiceLevels
+              "
+              [value]="level"
+            >
+              {{ level }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Extras -->
+        <div
+          *ngIf="selectedItem.customizationOptions?.extras"
+          class="mb-6"
+          formGroupName="extras"
+        >
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Extra Options</label
+          >
+          <div class="space-y-2">
+            <div
+              *ngFor="let extra of selectedItem.customizationOptions?.extras"
+              class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            >
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  [formControlName]="extra.name"
+                  class="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                />
+                <span class="ml-2 text-gray-700">{{ extra.name }}</span>
+              </label>
+              <span class="text-gray-600">+{{ extra.price }} Birr</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Remove Ingredients -->
+        <div class="mb-6" formGroupName="removeIngredients">
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Remove Ingredients</label
+          >
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                formControlName="onions"
+                class="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+              />
+              <span class="ml-2 text-gray-700">Onions</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                formControlName="tomatoes"
+                class="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+              />
+              <span class="ml-2 text-gray-700">Tomatoes</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                formControlName="lettuce"
+                class="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+              />
+              <span class="ml-2 text-gray-700">Lettuce</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                formControlName="pickles"
+                class="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+              />
+              <span class="ml-2 text-gray-700">Pickles</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Special Instructions -->
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Special Instructions</label
+          >
+          <textarea
+            formControlName="specialInstructions"
+            rows="3"
+            placeholder="Any special requests?"
+            class="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+          ></textarea>
+        </div>
+
+        <!-- Total Price -->
+        <div
+          class="flex justify-between items-center mb-6 p-4 bg-gray-50 rounded-lg"
+        >
+          <span class="text-gray-700 font-medium">Total Price:</span>
+          <span class="text-xl font-bold text-orange-500"
+            >{{ calculateTotalPrice() }} Birr</span
+          >
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="!customizeForm.valid"
+          class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors duration-200 disabled:bg-gray-400"
+        >
+          Add to Cart
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

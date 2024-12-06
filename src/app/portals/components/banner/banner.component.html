@@ -1,0 +1,294 @@
+<section
+  class="relative bg-gradient-to-r from-orange-500 to-orange-600 overflow-hidden"
+>
+  <!-- Pattern Overlay -->
+  <div
+    class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%221%22%20fill-rule%3D%22evenodd%22%3E%3Ccircle%20cx%3D%223%22%20cy%3D%223%22%20r%3D%223%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <!-- Left Content -->
+      <div class="text-white space-y-6">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+          Delicious Food
+          <span class="block mt-2">Delivered To Your Door</span>
+        </h1>
+        <p class="text-lg md:text-xl text-orange-50">
+          Experience the best local restaurants at your fingertips. Fresh, fast,
+          and convenient delivery.
+        </p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <button
+            routerLink="/menu"
+            class="px-6 py-3 bg-white text-orange-600 rounded-lg font-semibold hover:bg-orange-50 transition-colors duration-200 shadow-lg hover:shadow-xl"
+          >
+            Order Now
+          </button>
+          <button
+            routerLink="/restaurants"
+            class="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-200 border-2 border-white/20"
+          >
+            Browse Restaurants
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="relative hidden md:block">
+        <!-- Fantasy-styled Container -->
+        <div class="relative">
+          <!-- Decorative Border -->
+          <div
+            class="absolute inset-0 -m-4 bg-white/10 rounded-2xl backdrop-blur-sm border-2 border-white/20 transform rotate-3"
+          ></div>
+
+          <!-- Main Image Container -->
+          <div
+            class="relative bg-gradient-to-b from-orange-600/90 to-orange-700/90 rounded-xl p-1.5"
+          >
+            <div class="relative rounded-lg overflow-hidden">
+              <!-- Main Image -->
+              <img
+                src="assets/images/vector.jpg"
+                alt="Delicious Food"
+                class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300"
+              />
+
+              <!-- Decorative Elements -->
+              <div
+                class="absolute -top-6 -left-6 w-20 h-20 bg-orange-400 rounded-full opacity-20 blur-lg"
+              ></div>
+              <div
+                class="absolute -bottom-4 -right-4 w-16 h-16 bg-orange-300 rounded-full opacity-20 blur-lg"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Floating Stats Card -->
+          <div
+            class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-xl transform -rotate-3 hover:rotate-0 transition-transform duration-300"
+          >
+            <div class="flex items-center space-x-4">
+              <div class="p-2 bg-orange-100 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-orange-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-gray-500 text-sm">Average Time</p>
+                <p class="text-gray-900 font-bold">25-35 min</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Sparkles -->
+          <div
+            class="absolute -top-8 -right-8 w-16 h-16 text-yellow-300 animate-pulse"
+          >
+            ✨
+          </div>
+          <div
+            class="absolute bottom-12 -left-4 w-16 h-16 text-yellow-300 animate-pulse delay-100"
+          >
+            ✨
+          </div>
+          <div
+            class="absolute top-1/2 -right-2 w-16 h-16 text-yellow-300 animate-pulse delay-200"
+          >
+            ✨
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Fast Delivery -->
+      <div
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
+        <div
+          class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-orange-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Fast Delivery</h3>
+        <p class="text-gray-600">
+          Quick and reliable delivery straight to your doorstep within minutes.
+        </p>
+      </div>
+
+      <!-- Fresh Food -->
+      <div
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
+        <div
+          class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-orange-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Fresh Food</h3>
+        <p class="text-gray-600">
+          Quality ingredients and freshly prepared meals from top local
+          restaurants.
+        </p>
+      </div>
+
+      <!-- Best Offers -->
+      <div
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
+        <div
+          class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-orange-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Best Offers</h3>
+        <p class="text-gray-600">
+          Exclusive deals and discounts on your favorite restaurants and meals.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Categories -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+      Popular Categories
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <!-- Pizza -->
+      <div class="group cursor-pointer">
+        <div
+          class="relative overflow-hidden rounded-xl aspect-square bg-orange-100"
+        >
+          <img
+            src="assets/images/categories/Pizza1.jpg"
+            alt="Pizza"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+          ></div>
+          <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">
+            Pizza
+          </h3>
+        </div>
+      </div>
+
+      <!-- Burger -->
+      <div class="group cursor-pointer">
+        <div
+          class="relative overflow-hidden rounded-xl aspect-square bg-orange-100"
+        >
+          <img
+            src="assets/images/categories/burger1.jpg"
+            alt="Burger"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+          ></div>
+          <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">
+            Burger
+          </h3>
+        </div>
+      </div>
+
+      <!-- Noodles -->
+      <div class="group cursor-pointer">
+        <div
+          class="relative overflow-hidden rounded-xl aspect-square bg-orange-100"
+        >
+          <img
+            src="assets/images/categories/noodle.jpg"
+            alt="Noodles"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+          ></div>
+          <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">
+            Noodles
+          </h3>
+        </div>
+      </div>
+
+      <!-- Salad with Enjera -->
+      <div class="group cursor-pointer">
+        <div
+          class="relative overflow-hidden rounded-xl aspect-square bg-orange-100"
+        >
+          <img
+            src="assets/images/categories/salad.jpg"
+            alt="Salad with Enjera"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+          ></div>
+          <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">
+            Salad with Enjera
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

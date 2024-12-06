@@ -1,0 +1,8 @@
+.section {
+  scroll-margin-top: 4rem;
+  min-height: calc(100vh - 4rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}

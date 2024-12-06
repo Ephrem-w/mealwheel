@@ -1,0 +1,127 @@
+<header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <img class="h-8 w-auto" src="assets/images/logo.png" alt="MealWheels" />
+        <span class="ml-2 text-xl font-bold text-gray-900">MealWheels</span>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex md:items-center md:space-x-8">
+        <a
+          (click)="scrollToSection('home')"
+          [class.text-orange-500]="activeSection === 'home'"
+          class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium cursor-pointer transition-colors"
+        >
+          Home
+        </a>
+        <a
+          (click)="scrollToSection('deals')"
+          [class.text-orange-500]="activeSection === 'deals'"
+          class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium cursor-pointer transition-colors"
+        >
+          Deals
+        </a>
+        <a
+          (click)="scrollToSection('about')"
+          [class.text-orange-500]="activeSection === 'about'"
+          class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium cursor-pointer transition-colors"
+        >
+          About Us
+        </a>
+        <a
+          routerLink="/menu"
+          [class.text-orange-500]="activeSection === 'menu'"
+          class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium cursor-pointer transition-colors"
+        >
+          Order Now
+        </a>
+      </div>
+
+      <!-- Sign In Button -->
+      <button
+        class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-500 hover:bg-orange-600"
+      >
+        Sign In
+      </button>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          (click)="toggleMobileMenu()"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-500 hover:bg-gray-100"
+        >
+          <svg
+            class="h-6 w-6"
+            [class.hidden]="isMobileMenuOpen"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <svg
+            class="h-6 w-6"
+            [class.hidden]="!isMobileMenuOpen"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="md:hidden" [class.hidden]="!isMobileMenuOpen">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a
+          *ngFor="let section of ['home', 'deals', 'about', 'order']"
+          (click)="scrollToSection(section)"
+          [class.text-orange-500]="activeSection === section"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-orange-500 hover:bg-gray-50 cursor-pointer"
+        >
+          {{ section | titlecase }}
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Main Content -->
+<main class="pt-16">
+  <!-- Add padding-top to account for fixed header -->
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen">
+    <!-- Your existing banner component -->
+    <app-banner></app-banner>
+  </section>
+
+  <!-- Deals Section -->
+  <section id="deals" class="min-h-screen">
+    <!-- Your existing deals component -->
+    <app-deals></app-deals>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="min-h-screen">
+    <!-- Your existing about component -->
+    <app-about></app-about>
+  </section>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</main>
